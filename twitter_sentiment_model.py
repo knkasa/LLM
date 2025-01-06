@@ -1,3 +1,5 @@
+# https://medium.com/@zhonghong9998/quantitative-finance-predicting-stock-prices-with-python-and-deep-learning-06a9538377c9
+
 import tweepy
 from textblob import TextBlob
 import pandas as pd
