@@ -30,8 +30,11 @@ from agno.vectors import MemoryVectorStore
 store = MemoryVectorStore()
 agent = Agent(model="gpt-4o-mini", vector_store=store)
 
-agent.add_documents(["Insurance sales increase 12% last year..."])
-agent.run("What happened last year in insurance?")
+agent.add_documents([
+    "SARIMAX is a time-series forecasting model used by economists.",
+    "LSTM networks can capture long-term temporal dependencies."
+    ])
+agent.run("What are differences between LSTM and SARIMAX.")
 
 # Build Multi-Agent Workflows
 from agno.agent import TeamAgent, Agent
@@ -59,3 +62,4 @@ response = agent.run(
     "Create a bar chart with items A=3, B=9, C=5 and save it."
     )
 print(response)
+
