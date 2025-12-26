@@ -36,6 +36,11 @@ What did Dr. Sarah Smith work on?
 #Note: Canonical entity is the word that gets cleaned from original word.
 #eg. Dr. S. Smith -> Dr. Sarah Smith
 
+#In the code below, it is using LLM to extract entities and nodes.
+#Instead, you could use janome or spacy to extract entites.
+#Then, finds subject/verb/nouns comibations again using janome/spacy.
+
+
 from anthropic import Anthropic
 import numpy as np
 from sklearn.cluster import DBSCAN
