@@ -1,5 +1,5 @@
 # DSPy example.  
-# With training, DSPy helps improve your prompt. (without fine-tuning the model!!)
+# With training(no GPU needed!!), DSPy helps improve your prompt. (without fine-tuning the model!!)
 
 # Your original prompt.
 '''
@@ -112,6 +112,7 @@ loaded_rag.load("my_optimized_rag.json")
 
 # Use it directly - no need to compile/optimize again
 response = loaded_rag("What is photosynthesis?")
+
 
 
 
