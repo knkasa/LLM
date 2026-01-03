@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import dspy
 from dspy.teleprompt import BootstrapFewShot
 
-# For Claude model from Bedrock, you likely need to setup keys through environment variable.
+# For Claude model from Bedrock, you likely need to setup keys through environment variable. Use other models like Amazon Nove.
 os.environ["AWS_REGION"] = "us-east-1"
 os.environ["AWS_ACCESS_KEY_ID"] = ""
 os.environ["AWS_SECRET_ACCESS_KEY"] = ""
@@ -122,4 +122,9 @@ teleprompter = BootstrapFewShot(metric=validate_answer)
 optimized_rag = teleprompter.compile(BasicQA(), trainset=trainset)
 
 response = optimized_rag("Where does Tomboo-sama live?")
+
 print("************:", response)
+#************: Prediction(
+#    reasoning='Based on the previous example provided, it was stated that "Tomboo-sama lives in Tokyo." This directly answers the question about where Tomboo-sama lives.',
+#    answer='Tokyo.'
+#)
