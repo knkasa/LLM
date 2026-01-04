@@ -48,5 +48,36 @@ print(response["output"])
 
 #Calling MCP tools directly (no agent)
 tool = tools[0]
+
+
+#========= Build MCP server using modular_mcp library ==========================
+# Run this as "python server.py", then run the code above.
+from modular_mcp import MCPServer, tool
+
+server = MCPServer(
+    name="example-mcp",
+    version="0.1.0",
+)
+
+@tool(
+    name="add_numbers",
+    description="Add two numbers together",
+)
+def add_numbers(a: int, b: int) -> int:
+    return a + b
+
+
+@tool(
+    name="hello",
+    description="Say hello to a user",
+)
+def hello(name: str) -> str:
+    return f"Hello, {name}!"
+
+
+if __name__ == "__main__":
+    server.run(port=3333)
+
 result = tool.invoke({"query": "LangChain memory"})
 print(result)
+
