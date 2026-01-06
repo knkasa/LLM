@@ -1,4 +1,5 @@
 # Instructor is a library that can make LLM return specified python type.
+# Currently limited to openAI model and vllm, but AWS bedrock can work.
 
 import instructor
 from openai import OpenAI
