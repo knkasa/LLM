@@ -56,12 +56,31 @@ with driver.session() as session:
     session.execute_write(insert_kg)
 
 # Function that can query knowledge graph from user_prompt.
+def subgraph_to_text(subgraph):
+    sentences = []
+    
+    for entity, relationship, related in subgraph:
+        # Simple template: "{entity} {relationship_type} {related}"
+        sentence = f"{entity.name} (a {entity.type}) {relationship.type} {related.name} (a {related.type})."
+        sentences.append(sentence)
+    
+    return "\n".join(sentences)
+
 def graph_rag_query(user_question, graph_db, llm):
   
     # Step 1: Extract entities from question (using llm)
     entities = llm.extract_entities(user_question)
     
     # Step 2: Query graph
+    # Pull the same entities found in prompt that matches in knowledge graph, then grab 1-2 relationships.
+    #          1 hop              2 hops
+    #    ┌────────┐         ┌────────┐
+    #Alice ─WORKS_ON─→ ProjectX ─USES─→ Python
+    #  │                        │
+    #  │ 1 hop                  │ 2 hops
+    #  │                        │
+    #  └─WORKS_IN─→ Engineering ─LOCATED_IN─→ Building5
+  
     context_subgraph = graph_db.query(f"""
         MATCH (e)-[r*1..2]-(related)
         WHERE e.name IN {entities}
@@ -73,6 +92,8 @@ def graph_rag_query(user_question, graph_db, llm):
     
     # Step 4: Generate answer
     return llm.generate(f"Context: {context}\n\nQuestion: {user_question}")
+
+
 
 user_question = "What technology does the product developed by OpenAI use?"
 response = graph_rag_query(user_question, graph_db, llm)
