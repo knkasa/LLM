@@ -57,7 +57,8 @@ with driver.session() as session:
 
 # Function that can query knowledge graph from user_prompt.
 def graph_rag_query(user_question, graph_db, llm):
-    # Step 1: Extract entities from question
+  
+    # Step 1: Extract entities from question (using llm)
     entities = llm.extract_entities(user_question)
     
     # Step 2: Query graph
