@@ -128,3 +128,16 @@ print("************:", response)
 #    reasoning='Based on the previous example provided, it was stated that "Tomboo-sama lives in Tokyo." This directly answers the question about where Tomboo-sama lives.',
 #    answer='Tokyo.'
 #)
+
+# Save it
+optimized_rag.save("my_optimized_rag.json")
+
+#Later load it.
+loaded_rag = BasicQA()
+loaded_rag.load("my_optimized_rag.json")
+
+# Use it directly - no need to compile/optimize again
+response = loaded_rag("What is photosynthesis?")
+response = optimized_rag(prompt)
+
+print(response['answer'])
