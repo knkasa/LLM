@@ -138,6 +138,7 @@ loaded_rag.load("my_optimized_rag.json")
 
 # Use it directly - no need to compile/optimize again
 response = loaded_rag("What is photosynthesis?")
-response = optimized_rag(prompt)
+response = loaded_rag(prompt)
 
 print(response['answer'])
+
