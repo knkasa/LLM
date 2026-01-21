@@ -1,6 +1,9 @@
 from openai import OpenAI
 
+# https://medium.com/@brian-curry-research/building-a-knowledge-graph-a-comprehensive-end-to-end-guide-using-modern-tools-e06fe8f3b368
+# Use spacy, janome to extract entity.
 #you could use REBEL, the open source model entity relationship finder.
+#Use Relik, coreferee to convert entity to canonical entity.
 
 client = OpenAI()
 
