@@ -1,4 +1,7 @@
 from openai import OpenAI
+
+#you could use REBEL, the open source model entity relationship finder.
+
 client = OpenAI()
 
 # Extract entities from texts using LLM.
