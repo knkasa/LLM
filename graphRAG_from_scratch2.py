@@ -4,6 +4,7 @@ from openai import OpenAI
 # Use spacy, janome to extract entity.
 #you could use REBEL, the open source model entity relationship finder.
 #Use Relik, coreferee to convert entity to canonical entity.
+# use nebulaDB for local DB.
 
 client = OpenAI()
 
