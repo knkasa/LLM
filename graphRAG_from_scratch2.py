@@ -5,6 +5,7 @@ from openai import OpenAI
 #you could use REBEL, the open source model entity relationship finder.
 #Use Relik, coreferee to convert entity to canonical entity.
 # use nebulaDB for local DB.
+# You could LangExtract to extract entity relationship.
 
 client = OpenAI()
 
