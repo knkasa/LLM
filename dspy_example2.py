@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 import dspy
 from dspy.teleprompt import BootstrapFewShot
 
+# For long context, you may use dspy.RLM (Recursive Language Models)
+
 # For Claude model from Bedrock, you likely need to setup keys through environment variable. Use other models like Amazon Nove.
 os.environ["AWS_REGION"] = "us-east-1"
 os.environ["AWS_ACCESS_KEY_ID"] = ""
@@ -107,7 +109,7 @@ class BasicQA(dspy.Module):
     def forward(self, question):
         return self.generate_answer(question=question)
 
-# Trining.
+# Training.
 trainset = [
     dspy.Example(question="Who is Tomboo-sama?", answer="Tomboo-sama lives in Tokyo.").with_inputs("question"),
     # ... more examples
@@ -141,4 +143,5 @@ response = loaded_rag("What is photosynthesis?")
 response = loaded_rag(prompt)
 
 print(response['answer'])
+
 
