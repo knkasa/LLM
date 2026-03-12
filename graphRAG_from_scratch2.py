@@ -2,8 +2,9 @@ from openai import OpenAI
 
 # https://medium.com/@brian-curry-research/building-a-knowledge-graph-a-comprehensive-end-to-end-guide-using-modern-tools-e06fe8f3b368
 # Use spacy, janome to extract entity.
-#you could use REBEL, the open source model entity relationship finder.
+#you could use REBEL(only works with English (, the open source model entity relationship finder.
 #Use Relik, coreferee to convert entity to canonical entity.
+#you could use kg_gen(choose either LLM or REBEL) that let you build knowledge graph?
 # use nebulaDB for local DB.
 # You could LangExtract to extract entity relationship. Use it with docling too.
 
