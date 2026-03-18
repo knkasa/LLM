@@ -6,6 +6,7 @@ import dspy
 from dspy.teleprompt import BootstrapFewShot
 
 # For long context, you may use dspy.RLM (Recursive Language Models)
+# https://medium.com/@Micheal-Lanham/how-mits-recursive-language-models-process-10-million-tokens-without-breaking-3e85f9cdd688
 
 # For Claude model from Bedrock, you likely need to setup keys through environment variable. Use other models like Amazon Nove.
 os.environ["AWS_REGION"] = "us-east-1"
