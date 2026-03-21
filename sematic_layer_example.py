@@ -205,6 +205,24 @@ rich_g = build_rich_semantic_graph(yaml_metadata)
 
 # Generating the "LLM Context"
 # Now that the graph has descriptions, you can write a helper function that "crawls" the graph to explain the schema to the LLM.
+def generate_llm_context(G):
+    context = "SYSTEM ONTOLOGY AND SCHEMA:\n"
+    for node, data in G.nodes(data=True):
+        if data.get('type') == 'entity':
+            context += f"\nENTITY: {node}\n- Description: {data['desc']}\n"
+            
+            # Find associated attributes (dimensions/measures)
+            attrs = [n for n in G.neighbors(node) if G.nodes[n].get('type') == 'attribute']
+            for a in attrs:
+                context += f"  * Attribute: {a} ({G.nodes[a].get('desc')})\n"
+                
+    context += "\nRELATIONSHIPS:\n"
+    for u, v, data in G.edges(data=True):
+        if data.get('type') == 'relationship':
+            context += f"- {u} can join to {v} via '{data['join']}' ({data['desc']})\n"
+            
+    return context
+
 def get_relevant_context(G, user_keywords):
     """
     Finds nodes matching keywords and returns them + their immediate neighbors.
@@ -231,7 +249,7 @@ def get_relevant_context(G, user_keywords):
 # Example Usage:
 # User asks: "What is the total spend for active customers?"
 keywords = ["spend", "status", "customer"]
+print(f"Keywords:{keywords}")
 snippet = get_relevant_context(rich_g, keywords)
 print(snippet)
-
 
