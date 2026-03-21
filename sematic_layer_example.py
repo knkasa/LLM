@@ -205,21 +205,32 @@ rich_g = build_rich_semantic_graph(yaml_metadata)
 
 # Generating the "LLM Context"
 # Now that the graph has descriptions, you can write a helper function that "crawls" the graph to explain the schema to the LLM.
-def generate_llm_context(G):
-    context = "SYSTEM ONTOLOGY AND SCHEMA:\n"
+def generate_sufficient_llm_context(G):
+    context = "### SEMANTIC & PHYSICAL SCHEMA ###\n"
+    
     for node, data in G.nodes(data=True):
         if data.get('type') == 'entity':
             context += f"\nENTITY: {node}\n- Description: {data['desc']}\n"
             
-            # Find associated attributes (dimensions/measures)
+            # 1. Get Attributes (The 'What')
             attrs = [n for n in G.neighbors(node) if G.nodes[n].get('type') == 'attribute']
             for a in attrs:
                 context += f"  * Attribute: {a} ({G.nodes[a].get('desc')})\n"
+            
+            # 2. Get Physical Implementation (The 'How')
+            context += "- IMPLEMENTATION DETAILS:\n"
+            tables = [n for n in G.neighbors(node) if G.nodes[n].get('type') == 'table']
+            for t in tables:
+                pk = G.nodes[t].get('pk', 'N/A')
+                context += f"  * Table: {t} (Primary Key: {pk})\n"
+                # Here you would ideally map attributes to specific columns
+                # This logic assumes your graph stores column-level mapping
                 
-    context += "\nRELATIONSHIPS:\n"
+    context += "\n### JOIN LOGIC ###\n"
     for u, v, data in G.edges(data=True):
         if data.get('type') == 'relationship':
-            context += f"- {u} can join to {v} via '{data['join']}' ({data['desc']})\n"
+            # Use the literal SQL join provided in the YAML
+            context += f"- {u} TO {v}: JOIN ON {data['join']} ({data['desc']})\n"
             
     return context
 
@@ -244,12 +255,14 @@ def get_relevant_context(G, user_keywords):
     subgraph = G.subgraph(relevant_nodes)
     
     # 4. Generate the snippet from the subgraph only
-    return generate_llm_context(subgraph)
+    return generate_sufficient_llm_context(subgraph)
 
 # Example Usage:
 # User asks: "What is the total spend for active customers?"
 keywords = ["spend", "status", "customer"]
 print(f"Keywords:{keywords}")
 snippet = get_relevant_context(rich_g, keywords)
+
+# Attribute is the necessary columns to use.
 print(snippet)
 
