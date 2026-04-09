@@ -54,12 +54,13 @@ backend = CompositeBackend(
     routes={"/memories/": StoreBackend(store=store)},
     default=StateBackend(),
 )
+
 agent = create_deep_agent(
     tools=[...],
     backend=backend,
-    memory=["path/to/AGENTS.md"],  # persistent context file
+    store=store,
+    memory=["/memories/AGENTS.md"],
 )
-
 #(another way by claude)
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
