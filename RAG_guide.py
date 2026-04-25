@@ -2,6 +2,7 @@
 # https://pub.towardsai.net/i-spent-3-months-building-ra-systems-before-learning-these-11-strategies-1a8f6b4278aa
 # RRF=use this to rerank hybrid RAG search.
 # Another strategy= each nodes have embedding vectors and connect them based on similarity, token level relationship, same paragraph, ...
+# https://zenn.dev/lluminai_tech/articles/6b1b1b11c57874
 
 #Strategy 1: Context-Aware Chunking
 #What it does: Instead of splitting documents at fixed character counts, it analyzes semantic boundaries and document structure.
