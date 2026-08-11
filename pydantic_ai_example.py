@@ -1,5 +1,6 @@
 # Force LLM to output specific python types.  Alternatives are instructor, guidance, marvin.
 # pydantic ai can work with openAI, local, bedrock, ... models.
+# combine this with outlines library.
 
 from pydantic import BaseModel
 from pydantic_ai import Agent
