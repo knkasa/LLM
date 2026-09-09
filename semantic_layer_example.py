@@ -1,7 +1,6 @@
-
+# 
 # Sematic Layer (yml file way)
 '''
-
 Gemini の回答
 When your YAML configuration or semantic manifest grows to
  hundreds or thousands of lines, you hit the "Context Window" 
@@ -68,12 +67,10 @@ Method	              Best For...	     Complexity
 RAG (Vector Search)	  500+ tables 	 High
 Two-Step Routing	  50–100 tables	 Medium
 Pruning/Compression	  20–50 tables	 Low
-
 '''
 
-#Ontology, knowledge graph way.
+#Ontology, knowledge graph way. (save the ontology in yml file)
 '''
-
 ========== Tables =============================================
 Table1: ent_users (Customers)
 Column     Type       Description (The "Meaning")
@@ -88,8 +85,7 @@ u_ref       INT           Foreign key mapping to ent_users.uid.
 amt_fcy     FLOAT         Amount in Foreign Currency.
 base_ccy    VARCHAR       The currency code (e.g., USD, EUR).
 
-
-========= Sematic layer in yml file ==========================
+========= Ontology in yml file ==========================
 entities:
   - name: customer
     description: "A person or entity that has registered an account."
@@ -132,9 +128,7 @@ relationships:
     join: "customer.uid = transaction.u_ref"
     description: "Connects customers to their specific purchase history."
 ===========================================================================
-
 '''
-
 import yaml
 import networkx as nx
 
