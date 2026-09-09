@@ -1,5 +1,6 @@
-# 
-# Sematic Layer (yml file way)
+# Sematic layer from Gemini.
+# Sematic Layer with ontology graph (yml file way)
+
 '''
 Gemini の回答
 When your YAML configuration or semantic manifest grows to
