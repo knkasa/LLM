@@ -1,3 +1,4 @@
+# Semantic layer usinv vector approach. For graph(ontology) approach, see sematic_layer_example1&2.py
 
 # Table=customers
 #| Column      | Type   | Description                         |
@@ -15,7 +16,6 @@
 #| order_date   | DATE   | Date when the order was placed   |
 #| total_amount | FLOAT  | Total value of the order (USD)   |
 
-# Semantic layer using Vector DB.
 #===================================================================
 semantic_chunks = [
     # =========================
