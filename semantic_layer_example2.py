@@ -1,6 +1,7 @@
+# Mock version of FabricIQ.
+# Use ontology as graph(networkx), and extract entities/relationships from 
 
-
-#Table=customers
+#1. Table:customers
 #| Column      | Type   | Description                         |
 #| ----------- | ------ | ----------------------------------- |
 #| customer_id | STRING | Unique identifier for each customer |
@@ -8,7 +9,7 @@
 #| signup_date | DATE   | Date when the customer registered   |
 #| country     | STRING | Country where the customer lives    |
 
-#2. Table: orders
+#2. Table:orders
 #| Column       | Type   | Description                      |
 #| ------------ | ------ | -------------------------------- |
 #| order_id     | STRING | Unique identifier for each order |
@@ -17,7 +18,7 @@
 #| total_amount | FLOAT  | Total value of the order (USD)   |
 
 # (In practice you’d load this via yaml.safe_load, but here we hardcode it)
-# You should also put descriptions to each columns.
+# Here, entitity=table, relationship, dimension=descriptions of each columns. metric=aggregation logic.
 semantic_layer = {
     "entities": {
         "customer": {
@@ -44,7 +45,7 @@ semantic_layer = {
             }
         }
     ],
-
+    # Here, you can add descriptions to each columns.
     "dimensions": [
         {"name": "customer_id", "entity": "customer", "column": "customer_id"},
         {"name": "country", "entity": "customer", "column": "country"},
@@ -149,8 +150,6 @@ def get_metric_entity(G, metric_name):
             return v
     return None
 
-import networkx as nx
-
 def extract_subgraph(G, extracted):
     nodes_to_include = set()
     edges_to_include = []
@@ -216,10 +215,10 @@ def subgraph_to_context(subG):
 
     return "\n".join(context)
 
-# Test
+# Test(assume LLM has extracted entities from prompt, total_revenue & country.
 query_entities = {
-    "metrics": ["total_revenue"],
-    "dimensions": ["country"]
+    "metrics": ["total_revenue"],  #aggregation
+    "dimensions": ["country"]  #column
 }
 
 subG = extract_subgraph(G, query_entities)
