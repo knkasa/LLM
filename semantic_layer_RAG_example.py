@@ -1,6 +1,5 @@
 
-
-#Table=customers
+# Table=customers
 #| Column      | Type   | Description                         |
 #| ----------- | ------ | ----------------------------------- |
 #| customer_id | STRING | Unique identifier for each customer |
@@ -8,7 +7,7 @@
 #| signup_date | DATE   | Date when the customer registered   |
 #| country     | STRING | Country where the customer lives    |
 
-#2. Table: orders
+# 2. Table: orders
 #| Column       | Type   | Description                      |
 #| ------------ | ------ | -------------------------------- |
 #| order_id     | STRING | Unique identifier for each order |
@@ -18,8 +17,8 @@
 
 # Semantic layer using Vector DB.
 
+#===================================================================
 semantic_chunks = [
-
     # =========================
     # METRICS(These drive aggregation logic.)
     # =========================
@@ -207,7 +206,7 @@ Synonyms: last month, this year, recent orders
 """
     }
 ]
-
+#=========================================================
 
 # Save it in FAISS.
 from sentence_transformers import SentenceTransformer
