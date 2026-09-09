@@ -16,7 +16,6 @@
 #| total_amount | FLOAT  | Total value of the order (USD)   |
 
 # Semantic layer using Vector DB.
-
 #===================================================================
 semantic_chunks = [
     # =========================
